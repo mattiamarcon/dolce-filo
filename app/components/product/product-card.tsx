@@ -8,7 +8,14 @@ import { supabaseClient } from "@/utils/supabase/client"
 
 
 interface ProductCardProps {
-  product: Product
+  product: {
+    id: number
+    nome: string
+    descrizione: string
+    prezzo: number
+    categoria: string
+    immagine:string
+  }
 }
 
 export default function ProductCard({product}:ProductCardProps) {
