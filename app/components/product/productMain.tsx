@@ -2,9 +2,8 @@
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Colore, Immagine, Product, Taglia } from '@/utils/types/types'
-import { ChevronLeft, ChevronRight, Heart, Minus, Plus, ShoppingCart } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart } from 'lucide-react'
 import React, { useState } from 'react'
 import Image from "next/image"
 
@@ -26,11 +25,17 @@ function ProductMain({prodotto,immagini,taglie,colori}:propTypes) {
     } = prodotto
 
     const nextImage = () => {
-        (mainImage==immagini.length-1)?setMainImage(0):setMainImage(prev=>prev+1)
+      if(mainImage==immagini.length-1)
+        setMainImage(0)
+      else
+        setMainImage(prev=>prev+1)
     }
 
     const prevImage = () => {
-        (mainImage==0)?setMainImage(immagini.length-1):setMainImage(prev=>prev-1)
+      if(mainImage==0)
+        setMainImage(immagini.length-1)
+      else
+        setMainImage(prev=>prev-1)
     }
 
   return (
@@ -152,7 +157,7 @@ function ProductMain({prodotto,immagini,taglie,colori}:propTypes) {
             </div>
           </div>
 
-          <span>* Se il prodotto che stai acquistando è personalizzabile, la personalizzazzione avverrà all'interno del carello</span>
+          <span>* Se il prodotto che stai acquistando è personalizzabile, la personalizzazzione avverrà al checkout</span>
 
           <div className="flex gap-4 pt-4">
             <Button size="lg" className="flex-1" onClick={()=>console.log("ok")}>

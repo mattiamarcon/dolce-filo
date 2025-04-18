@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { supabaseServer } from '@/utils/supabase/server'
-import { supabaseClient } from '@/utils/supabase/client'
 import { Product } from '@/utils/types/types'
 
 
@@ -61,10 +60,6 @@ export async function addProduct(product:Product){
   })
 
   redirect("/prodotti")
-
-
-  //console.log(nome,prezzo,descrizione,categoria,immagine);
-  //redirect("/")
 }
 
 export async function addImages(nome:string,images:File[]){
@@ -88,6 +83,8 @@ export async function addImages(nome:string,images:File[]){
           link:url,
           idProdotto:id.data[0].id
         })
+        if(error)
+          console.log(error)
     })
   }
 }
@@ -96,18 +93,17 @@ async function fetchUrls(images:File[]){
 
   const supabase = await supabaseServer();
 
-  const urls:String[]=[];
+  const urls:string[]=[];
 
   images.forEach(async (img:File)=>{
     const {data}=  supabase.storage.from("immaginprodotto").getPublicUrl(img.name)
-    console.log(data.publicUrl)
     urls.push(data.publicUrl);
   })
 
   return urls;
 }
 
-export async function addColors(nome:string,colors:String[]){
+export async function addColors(nome:string,colors:string[]){
 
   const supabase = await supabaseServer();
 
@@ -119,11 +115,13 @@ export async function addColors(nome:string,colors:String[]){
           colore,
           idProdotto:id.data[0].id
         })
+        if(error)
+          console.log(error)
     })
   }
 }
 
-export async function addSizes(nome:string,taglie:String[]){
+export async function addSizes(nome:string,taglie:string[]){
 
   const supabase = await supabaseServer();
 

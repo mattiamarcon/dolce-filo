@@ -2,10 +2,9 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Product, Immagine } from "@/utils/types/types"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { supabaseClient } from "@/utils/supabase/client"
-import { useState } from "react"
+import { Product } from "@/utils/types/types"
+import { Card, CardContent  } from "@/components/ui/card"
+
 
 
 interface ProductCardProps {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import ProductCard from "@/app/components/product/product-card"
 import ProductFilters from "@/app/components/product/product-filters"
-import { Product, Immagine } from "@/utils/types/types"
+import { Product } from "@/utils/types/types"
 import { supabaseClient } from "@/utils/supabase/client"
 
 export default function ProductCatalog() {

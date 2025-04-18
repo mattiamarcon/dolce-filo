@@ -29,8 +29,10 @@ export function Header({isLogged}:{isLogged:boolean}) {
     const { error } = await supabase.auth.signOut();
 
 
+    if(!error)
+      setLogged(false)
 
-    setLogged(false)
+    setOpen(false)
 
 
     router.push("/");
@@ -50,10 +52,10 @@ export function Header({isLogged}:{isLogged:boolean}) {
   ]
 
 
-  const handleNavigation = (href: string) => {
-    setOpen(false)
-    router.push(href) 
-  }
+  // const handleNavigation = (href: string) => {
+  //   setOpen(false)
+  //   router.push(href) 
+  // }
 
   return (
     <header className="sticky top-0 z-[200] w-full border-b bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
@@ -87,7 +89,7 @@ export function Header({isLogged}:{isLogged:boolean}) {
                     </>
                   } 
             </div>
-            {logged ? <button className="text-2xl font-medium cursor-pointer" onClick={()=>{signOut(), setOpen(false)}}>Log out</button> : <Link href={"/login"} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
+            {logged ? <button className="text-2xl font-medium cursor-pointer" onClick={()=>signOut()}>Log out</button> : <Link href={"/login"} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
         </nav>
 
         <Sheet open={open} onOpenChange={setOpen}>
@@ -120,7 +122,7 @@ export function Header({isLogged}:{isLogged:boolean}) {
                         ))}
                     </>
                   } 
-                 {logged ? <button className="text-2xl font-medium w-fit" onClick={()=>{signOut(), setOpen(false)}}>Log out</button> : <Link href={"/login"} onClick={()=>setOpen(false)} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
+                 {logged ? <button className="text-2xl font-medium w-fit" onClick={()=>signOut()}>Log out</button> : <Link href={"/login"} onClick={()=>setOpen(false)} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
           </nav>
           
         </SheetContent>

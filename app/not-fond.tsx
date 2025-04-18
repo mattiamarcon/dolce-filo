@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, Home, ArrowLeft } from "lucide-react"
+import {  Home, ArrowLeft } from "lucide-react"
 
 export default function NotFound() {
   return (
@@ -12,8 +11,8 @@ export default function NotFound() {
           <h1 className="text-9xl font-bold text-muted-foreground/20">404</h1>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold tracking-tight">Page not found</h2>
-              <p className="text-muted-foreground">Sorry, we couldn't find the page you're looking for.</p>
+              <h2 className="text-2xl font-bold tracking-tight">Pagina non trovata</h2>
+              <p className="text-muted-foreground">Ci dispiace, ma la pagina che stai cercando non è raggiungibile o non esiste.</p>
             </div>
           </div>
         </div>
@@ -39,29 +38,19 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Search */}
-        <div className="space-y-4">
-          <form className="flex w-full max-w-sm mx-auto items-center space-x-2">
-            <Input type="text" placeholder="Search for content..." className="flex-1" />
-            <Button type="submit" size="icon">
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </form>
-        </div>
 
         {/* Navigation */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button asChild variant="outline">
             <Link href="/">
               <Home className="mr-2 h-4 w-4" />
-              Back to home
+              Torna alla home
             </Link>
           </Button>
           <Button asChild variant="ghost">
             <Link href="javascript:history.back()">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Go back
+              Torna alla pagina precedente
             </Link>
           </Button>
         </div>

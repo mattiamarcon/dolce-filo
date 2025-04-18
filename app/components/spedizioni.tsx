@@ -1,6 +1,5 @@
-import { Package, Truck, Store, Clock, Mail } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Package, Truck } from "lucide-react"
+
 
 export function Spedizioni() {
   const shippingOptions = [
@@ -24,7 +23,7 @@ export function Spedizioni() {
         <p className="text-lg md:text-xl mb-6 leading-relaxed">
           Ecco le modalità di ritiro e spedizione del tuo ordine 📦
         </p>
-        <p className="text-muted-foreground mb-6 text-md md:text-lg">Scegli l'opzione che preferisci al momento dell'acquisto.</p>
+        <p className="text-muted-foreground mb-6 text-md md:text-lg">Scegli l&apos;opzione che preferisci al momento dell&apos;acquisto.</p>
         <p className="text-muted-foreground  md:text-lg">Per qualsiasi informazione contattami in privato.</p>
       </div>
 

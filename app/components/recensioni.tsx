@@ -37,7 +37,7 @@ export function Recensioni() {
               <Star key={i} className="h-4 w-4 fill-yellow-500 text-yellow-500" />
             ))}
           </div>
-          <p className="text-lg leading-relaxed mb-6 italic">"{review.text}"</p>
+          <p className="text-lg leading-relaxed mb-6 italic">`{review.text}`</p>
           <div className="mt-auto ">
             <p className="font-medium text-md">{review.name}</p>
             <p className="text-s text-muted-foreground">{review.location}</p>

@@ -15,6 +15,7 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/comp
 import { addColors, addImages, addProduct, addSizes } from "@/app/action"
 import Form from "next/form"
 import { Product } from "@/utils/types/types"
+import Image from "next/image"
 
 export default function ProductForm() {
   const [title, setTitle] = useState("")
@@ -318,7 +319,7 @@ export default function ProductForm() {
           <Label className="text-xl">Immagini del Prodotto</Label>
           {errors.images && <span className="text-red-500 ml-2">*</span>}
           {imagesPreviews.length > 0 && (
-            <div className="text-gray-500 text-xl">Clicca su un'immagine per impostarla come copertina</div>
+            <div className="text-gray-500 text-xl">Clicca su un immagine per impostarla come copertina</div>
           )}
         </div>
 
@@ -358,7 +359,7 @@ export default function ProductForm() {
                       onClick={() => setCoverImage(index)}
                     >
                       <div className="relative aspect-square cursor-pointer group">
-                        <img
+                        <Image
                           src={preview || "/placeholder.svg"}
                           alt={`Preview ${index + 1}`}
                           className="w-full h-full object-cover transition-opacity group-hover:opacity-90"

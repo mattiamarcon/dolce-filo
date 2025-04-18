@@ -1,4 +1,3 @@
-import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
 import { supabaseServer } from "@/utils/supabase/server"
 
