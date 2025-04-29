@@ -3,41 +3,32 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Menu} from 'lucide-react'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { Menu, ShoppingCart } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { supabaseClient } from "@/utils/supabase/client"
 
-
-export function Header({isLogged}:{isLogged:boolean}) {
-
-  const supabase= supabaseClient();
+export function Header({ isLogged }: { isLogged: boolean }) {
+  const supabase = supabaseClient()
 
   const [open, setOpen] = useState(false)
-  const router = useRouter();
+  const router = useRouter()
 
-  const [logged,setLogged]=useState(isLogged)
+  const [logged, setLogged] = useState(isLogged)
 
-  useEffect(()=>{
+  useEffect(() => {
     setLogged(isLogged)
-  },[isLogged])
+  }, [isLogged])
 
-  async function signOut(){
-    const { error } = await supabase.auth.signOut();
+  async function signOut() {
+    const { error } = await supabase.auth.signOut()
 
-
-    if(!error)
-      setLogged(false)
+    if (!error) setLogged(false)
 
     setOpen(false)
 
-
-    router.push("/");
-    router.refresh();     
-}
+    router.push("/")
+    router.refresh()
+  }
 
   const navigation = [
     { name: "Prodotti", href: "/prodotti" },
@@ -45,16 +36,15 @@ export function Header({isLogged}:{isLogged:boolean}) {
     { name: "Spedizioni", href: "/spedizioni" },
   ]
 
-  const hideNavigation=[
-    {name: "Aggiungi prodotto", href:"/dashboard/aggiungiProdotto"},
-    {name: "Info prodotti", href:"/dashboard/infoProdotti"},
-    {name: "Ordini", href:"/dashboard/ordini"},
+  const hideNavigation = [
+    { name: "Aggiungi prodotto", href: "/dashboard/aggiungiProdotto" },
+    { name: "Info prodotti", href: "/dashboard/infoProdotti" },
+    { name: "Ordini", href: "/dashboard/ordini" },
   ]
-
 
   // const handleNavigation = (href: string) => {
   //   setOpen(false)
-  //   router.push(href) 
+  //   router.push(href)
   // }
 
   return (
@@ -63,71 +53,96 @@ export function Header({isLogged}:{isLogged:boolean}) {
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <span className="text-3xl font-bold">Dolce filo🪡</span>
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <div className="flex items-center space-x-6">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-2xl font-medium"
-              >
+              <Link key={item.name} href={item.href} className="text-2xl font-medium">
                 {item.name}
               </Link>
-            ))}  
-             {logged && 
-                    <>
-                      {hideNavigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="text-2xl font-medium"
-                          onClick={()=>setOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                        ))}
-                    </>
-                  } 
-            </div>
-            {logged ? <button className="text-2xl font-medium cursor-pointer" onClick={()=>signOut()}>Log out</button> : <Link href={"/login"} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
+            ))}
+            {logged && (
+              <>
+                {hideNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-2xl font-medium"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </>
+            )}
+          </div>
+          <div className="flex items-center space-x-6">
+            <Link href="/carrello" className="text-2xl">
+              <ShoppingCart className="h-6 w-6" />
+            </Link>
+            {logged ? (
+              <button className="text-2xl font-medium cursor-pointer" onClick={() => signOut()}>
+                Log out
+              </button>
+            ) : (
+              <Link href={"/login"} className="text-2xl font-medium cursor-pointer">
+                Accedi
+              </Link>
+            )}
+          </div>
         </nav>
 
-        <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger className="md:hidden ml-auto">
-          <Menu className="h-8 w-8" />
-        </SheetTrigger>
-        <SheetContent>
-          <nav className="flex flex-col space-y-5 pt-10">
+        {/* Mobile Cart Icon - Outside the burger menu */}
+        <div className="flex items-center ml-auto md:hidden">
+          <Link href="/carrello" className="mr-4">
+            <ShoppingCart className="h-6 w-6" />
+          </Link>
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger>
+              <Menu className="h-8 w-8" />
+            </SheetTrigger>
+            <SheetContent>
+              <nav className="flex flex-col space-y-5 pt-10">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     className="text-2xl font-medium"
-                    onClick={()=>setOpen(false)}
+                    onClick={() => setOpen(false)}
                   >
                     {item.name}
                   </Link>
-                  ))}
-                  {logged && 
-                    <>
-                      {hideNavigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="text-2xl font-medium"
-                          onClick={()=>setOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                        ))}
-                    </>
-                  } 
-                 {logged ? <button className="text-2xl font-medium w-fit" onClick={()=>signOut()}>Log out</button> : <Link href={"/login"} onClick={()=>setOpen(false)} className="text-2xl font-medium cursor-pointer">Accedi</Link>}
-          </nav>
-          
-        </SheetContent>
-      </Sheet>
+                ))}
+                {logged && (
+                  <>
+                    {hideNavigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="text-2xl font-medium"
+                        onClick={() => setOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </>
+                )}
+                {logged ? (
+                  <button className="text-2xl font-medium w-fit" onClick={() => signOut()}>
+                    Log out
+                  </button>
+                ) : (
+                  <Link href={"/login"} onClick={() => setOpen(false)} className="text-2xl font-medium cursor-pointer">
+                    Accedi
+                  </Link>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )
 }
+

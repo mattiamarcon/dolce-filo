@@ -2,10 +2,13 @@
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Colore, Immagine, Product, Taglia } from '@/utils/types/types'
+import { CartProduct, Colore, Immagine, Product, Taglia } from '@/utils/types/types'
 import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingCart } from 'lucide-react'
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import Image from "next/image"
+import { useCartContext } from '@/app/cart-provider'
+import { toast } from "sonner"
+
 
 interface propTypes{
     prodotto:Product,
@@ -24,6 +27,8 @@ function ProductMain({prodotto,immagini,taglie,colori}:propTypes) {
         prezzo, nome, descrizione
     } = prodotto
 
+    const {cart,setCart} = useCartContext();
+
     const nextImage = () => {
       if(mainImage==immagini.length-1)
         setMainImage(0)
@@ -37,6 +42,21 @@ function ProductMain({prodotto,immagini,taglie,colori}:propTypes) {
       else
         setMainImage(prev=>prev-1)
     }
+
+  function addToCart(){
+    toast("Prodotto aggiunto al carrello",{ 
+      description: `${nome} - ${selectedColor.colore}, ${selectedSize.taglia}`,
+    })
+
+    const p:CartProduct={
+      product:prodotto,
+      color:selectedColor as unknown as string,
+      size:selectedColor as unknown as string,
+    }
+    setCart([...cart,p])
+    
+    
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -160,7 +180,7 @@ function ProductMain({prodotto,immagini,taglie,colori}:propTypes) {
           <span>* Se il prodotto che stai acquistando è personalizzabile, la personalizzazzione avverrà al checkout</span>
 
           <div className="flex gap-4 pt-4">
-            <Button size="lg" className="flex-1" onClick={()=>console.log("ok")}>
+            <Button size="lg" className="flex-1 cursor-pointer" onClick={addToCart}>
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Aggiungi al carrello
             </Button>

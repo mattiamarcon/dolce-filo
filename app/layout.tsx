@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Cormorant } from "next/font/google";
+import CartProvider from "@/app/cart-provider"
+import { Toaster } from "@/components/ui/sonner"
 
 
 
@@ -25,7 +27,8 @@ export default async function RootLayout({
       <body
         className={`${cormorant.className} antialiased`}
       >        
-        {children}
+        <CartProvider>{children}</CartProvider>   
+        <Toaster />   
       </body>
     </html>
   );

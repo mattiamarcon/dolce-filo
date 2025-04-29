@@ -59,29 +59,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container px-4 md:px-6 mx-auto">
-          <h2 className="font-serif text-5xl md:text-6xl font-light text-center mb-12">PRODOTTI</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Prodotti
-              title="T-SHIRT"
-              image="/t-shirt.webp"
-              href="/prodotti"
-            />
-            <Prodotti
-              title="BORSE"
-              image="/borse.webp"
-              href="/prodotti"
-            />
-            <Prodotti
-              title="ACCESSORI"
-              image="/accessori.webp"
-              href="/prodotti"
-            />
-          </div>
+      <section className="py-16 md:py-24">
+      <div className="container px-4 md:px-6 mx-auto">
+        <h2 className="font-serif text-5xl md:text-6xl font-light text-center mb-12">PRODOTTI</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 md:px-8">
+          <Prodotti title="T-SHIRT" image="/t-shirt.webp" href="/prodotti" />
+          <Prodotti title="BORSE" image="/borse.webp" href="/prodotti" />
+          <Prodotti title="ACCESSORI" image="/accessori.webp" href="/prodotti" />
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* About Section */}
       <section className="py-16 md:py-24 bg-[#f5f5f5]">

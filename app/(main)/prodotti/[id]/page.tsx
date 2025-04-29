@@ -26,7 +26,6 @@ export default function ProductPage({
   useEffect(()=>{
     async function loadSlug(){
       const { id } = await params;
-      console.log(id)
       setId(id)
     }
     loadSlug();
@@ -45,8 +44,6 @@ export default function ProductPage({
           categoria: data[0].categoria,
           immagine:data[0].immagine
         }     
-
-        // console.log(prodotti)
 
         setProduct(prodotti)
       }
@@ -106,10 +103,9 @@ export default function ProductPage({
     <>
       {!(immagini && product && taglie && colori) ? 
       <SkeletonProduct />
-
-:
+      : 
       <ProductMain prodotto={product} immagini={immagini} taglie={taglie} colori={colori} />
-    }    
+      }    
     </> 
   )
 }

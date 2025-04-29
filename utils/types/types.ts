@@ -24,3 +24,9 @@ export interface Colore {
     idProdotto: number
     colore:string
 }
+
+export interface CartProduct{
+    product:Product,
+    color:string,
+    size:string
+  }
