@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import type { CartProduct, Product } from "@/utils/types/types"
+import type { CartProduct } from "@/utils/types/types"
 import { createContext, useContext, useState } from "react"
 
 
